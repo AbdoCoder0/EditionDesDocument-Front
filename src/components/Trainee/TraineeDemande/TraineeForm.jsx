@@ -2,9 +2,10 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import { toast, Toaster } from 'react-hot-toast';
 
 const TraineeForm = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
   const onSubmit = async (data) => {
     const requestData = {
@@ -29,20 +30,22 @@ const TraineeForm = () => {
 
     try {
       const response = await axios.post('https://localhost:7153/Requests/add', requestData);
+      toast.success('Demande envoyée avec succès!');
       console.log('Demande envoyée:', response.data);
+      reset();
     } catch (error) {
+      toast.error('Erreur lors de l\'envoi de la demande');
       console.error('Erreur lors de l\'envoi de la demande:', error);
     }
   };
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-md">
+      <Toaster /> 
       <h2 className="text-2xl font-semibold mb-4 text-center">Formulaire de Demande</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
         <div className='mb-4'>
           <label htmlFor="typeDocument" className="block text-gray-700 mb-4">Type de Document</label>
-
-          <label htmlFor="documentType" className="block text-gray-700">Type de Document</label>
 
           <select
             id="documentType"
