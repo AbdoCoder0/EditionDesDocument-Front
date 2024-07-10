@@ -6,6 +6,7 @@ import Home from './components/Home/Home'
 import AssistanteTable from './components/Assistante/AssistanteTable'
 import DirecteurTable from './components/Directeur/DirecteurTable'
 import DirecteurTableValide from './components/Directeur/DirecteurTableValide'
+import Header from './components/UI/Header/Header'
 
 
 function App() {
