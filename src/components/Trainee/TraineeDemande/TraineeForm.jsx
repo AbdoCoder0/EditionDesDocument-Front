@@ -30,7 +30,7 @@ const TraineeForm = () => {
       <h2 className="text-2xl font-semibold mb-4 text-center">Formulaire de Demande</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
         <div className='mb-4'>
-          <label htmlFor="typeDocument" className="block text-gray-700">Type de Document</label>
+          <label htmlFor="typeDocument" className="block text-gray-700 mb-4">Type de Document</label>
           <select
             id="typeDocument"
             className={`w-full px-3 py-2 border ${errors.typeDocument ? 'border-red-500' : 'border-gray-300'} rounded-md`}
