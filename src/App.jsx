@@ -1,6 +1,6 @@
 import './App.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-imporit AssistanteForm from './components/Assistante/AssistanteDemande/AssistanteForm'
+import AssistanteForm from './components/Assistante/AssistanteDemande/AssistanteForm'
 import TraineeForm from './components/Trainee/TraineeDemande/TraineeForm'
 import Home from './components/Home/Home'
 import AssistanteTable from './components/Assistante/AssistanteTable'
