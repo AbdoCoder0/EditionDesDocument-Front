@@ -7,8 +7,11 @@ import AssistanteTable from './components/Assistante/AssistanteTable'
 import DirecteurTable from './components/Directeur/DirecteurTable'
 import DirecteurTableValide from './components/Directeur/DirecteurTableValide'
 import Header from './components/UI/Header/Header'
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> e5d810f989285394c286c6b7062ded92aa0fc6ea
 
 function App() {
 
