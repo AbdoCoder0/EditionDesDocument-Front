@@ -40,9 +40,12 @@ const TraineeForm = () => {
   };
 
   return (
+    <>
+            <h1 className='mt-40 mb-4 text-[25px] font-bold flex justify-center items-center'>Interface stagiaire</h1>
+
     <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-md">
       <Toaster /> 
-      <h2 className="text-2xl font-semibold mb-4 text-center">Formulaire de Demande</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-center text-gray-600">Formulaire de Demande</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
         <div className='mb-4'>
           <label htmlFor="typeDocument" className="block text-gray-700 mb-4">Type de Document</label>
@@ -67,6 +70,7 @@ const TraineeForm = () => {
         </button>
       </form>
     </div>
+    </>
   );
 };
 

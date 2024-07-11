@@ -1,14 +1,28 @@
 import { IoSearch } from "react-icons/io5";
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+// import { Link } from 'react-router-dom'
 
 function DirecteurTable(){
+
+  const [isSecondButtonDisabled, setIsSecondButtonDisabled] = useState(false);
+
+  const handleFirstButtonClick = () => {
+    console.log('Button clicked');
+    setIsSecondButtonDisabled((prev) => !prev);
+  };
+
+  const handleSecondButtonClick = () => {
+    if (!isSecondButtonDisabled) {
+      console.log('Print');
+    }
+  };
     return(
         <>
          <h2 className="text-2xl font-bold  my-6 flex justify-center items-center">Table Directeur en attente de validation</h2>
 
-         <div className="App flex justify-center items-center mt-40 ">
+         <div className="flex justify-center items-center mt-40 ">
          <div className="flex flex-col items-center w-full mx-40">
+
 
          <div className=" flex mx-0 w-full items-center ">
             <div className="relative block">
@@ -19,12 +33,16 @@ function DirecteurTable(){
               placeholder="Entrer le nom de stagiaire" type="text" name="search"/>
             </div>
 
-            <div className="flex w-full justify-end ">
-                
-        <Link to={'/directeurTableValide'} className=' bg-green-500 rounded-lg p-2'>Table de document validé</Link>
-            </div>
+            {/* <div className="flex w-full justify-end ">
+                <input id="draft" className="peer/validée" type="radio" name="status" checked />
+                <label  className=" mx-2">validée</label>
+
+                <input id="published" className="peer/attente ml-7" type="radio" name="status" />
+                <label  className=" mx-2">en attente</label>
+            </div> */}
 
          </div>
+
 
          <div className="overflow-x-auto mt-10 w-full">
 
@@ -34,6 +52,7 @@ function DirecteurTable(){
               <th className="text-left py-3 px-4 font-semibold text-sm">Nom et Prenom</th>
               <th className="text-left py-3 px-4 font-semibold text-sm">Type de Documment</th>
               <th className="text-left py-3 px-1 font-semibold text-sm"></th>
+              <th className="text-left py-3 px-1 font-semibold text-sm"></th>
             </tr>
           </thead>
           <tbody>
@@ -41,8 +60,18 @@ function DirecteurTable(){
               <td className="border-t py-3 px-4">John Doe</td>
               <td className="border-t py-3 px-4">Contrat</td>
               <td className="border-t py-3 px-1">
-                <button  className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Validé</button>
+                <button  className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                onClick={handleFirstButtonClick}
+              >Validé</button>
               </td>
+              <td className="border-t py-3 px-1">
+                <button  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                onClick={handleSecondButtonClick}
+                disabled={isSecondButtonDisabled}
+                style={{ backgroundColor: isSecondButtonDisabled ? 'grey' : 'blue', color: 'white' }}
+              >Imprimer</button>
+              </td>
+    
             </tr>
             <tr className="bg-gray-50">
               <td className="border-t py-3 px-4">Jane Smith</td>
@@ -50,6 +79,10 @@ function DirecteurTable(){
               <td className="border-t py-3 px-1">
                 <button  className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Validé</button>
               </td>
+              <td className="border-t py-3 px-1">
+                <button  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Imprimer</button>
+              </td>
+    
             </tr>
             <tr>
               <td className="border-t py-3 px-4">Mike Johnson</td>
@@ -57,6 +90,10 @@ function DirecteurTable(){
               <td className="border-t py-3 px-1">
                 <button  className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Validé</button>
               </td>
+              <td className="border-t py-3 px-1">
+                <button  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Imprimer</button>
+              </td>
+    
             </tr>
           </tbody>
         </table>
