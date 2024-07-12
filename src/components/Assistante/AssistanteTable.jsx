@@ -1,6 +1,28 @@
 import { IoSearch } from "react-icons/io5";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
 
 function AssistanteTable(){
+
+
+  const [requests, setRequests] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://localhost:7153/Requests/list');
+        console.log('Demande envoyée:', response.data);
+        const filteredRequests = response.data.filter(request => request.documentStatus === 1);
+        setRequests(filteredRequests);
+      } catch (error) {
+        console.error('Erreur lors de l\'envoi de la demande:', error);
+      }
+    };
+
+    fetchData();
+  
+  }, []);
     return(
         <>
          <h2 className="text-2xl font-bold  my-6 flex justify-center items-center">Table Assistante pour gerer les documment</h2>
@@ -19,52 +41,41 @@ function AssistanteTable(){
 
             <div className="flex w-full justify-end ">
                 <input id="draft" className="peer/validée" type="radio" name="status" checked />
-                <label for="draft" className="peer-checked/validée:text-green-500 mx-2">validée</label>
+                <label htmlFor="draft" className="peer-checked/validée:text-green-500 mx-2">validée</label>
 
                 <input id="published" className="peer/attente ml-7" type="radio" name="status" />
-                <label for="published" className="peer-checked/attente:text-orange-500 mx-2">en attente</label>
+                <label htmlFor="published" className="peer-checked/attente:text-orange-500 mx-2">en attente</label>
             </div>
 
          </div>
 
          <div className="overflow-x-auto mt-10 w-full">
 
-        <table className="bg-white border border-gray-200 w-full">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="text-left py-3 px-4 font-semibold text-sm">Nom et Prenom</th>
-              <th className="text-left py-3 px-4 font-semibold text-sm">Type de Documment</th>
-              <th className="text-left py-3 px-4 font-semibold text-sm">état</th>
-              <th className="text-left py-3 px-1 font-semibold text-sm"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="border-t py-3 px-4">John Doe</td>
-              <td className="border-t py-3 px-4">Contrat</td>
-              <td className="border-t py-3 px-4 text-green-700">validée</td>
-              <td className="border-t py-3 px-1">
-                <button  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Imprimer</button>
-              </td>
-            </tr>
-            <tr className="bg-gray-50">
-              <td className="border-t py-3 px-4">Jane Smith</td>
-              <td className="border-t py-3 px-4">Demande de stage</td>
-              <td className="border-t py-3 px-4 text-green-600">validée</td>
-              <td className="border-t py-3 px-1">
-                <button  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Imprimer</button>
-              </td>
-            </tr>
-            <tr>
-              <td className="border-t py-3 px-4">Mike Johnson</td>
-              <td className="border-t py-3 px-4">Attestation d'inscription</td>
-              <td className="border-t py-3 px-4 text-orange-600">en attente </td>
-              <td className="border-t py-3 px-1">
-                <button  className="bg-gray-500 hover:bg-grey-700 text-white font-bold py-2 px-4 rounded">Imprimer</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+         <div className="overflow-x-auto my-10 w-full">
+            <table className="bg-white border border-gray-200 w-full ">
+              <thead>
+                <tr className="bg-gray-100">
+                  <th className="text-left py-3 px-4 font-semibold text-sm">Nom et Prenom</th>
+                  <th className="text-left py-3 px-4 font-semibold text-sm">Type de Document</th>
+                  <th className="text-left py-3 px-1 font-semibold text-sm"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {requests.map((request) => (
+                  <tr key={request.id}>
+                    <td className="border-t py-3 px-4">{request.nameTrainee}</td>
+                    <td className="border-t py-3 px-4">{request.documentType}</td>
+                    
+                    <td className="border-t py-3 px-1">
+                      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Imprimer
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
       </div>
       </div>
       </div>
