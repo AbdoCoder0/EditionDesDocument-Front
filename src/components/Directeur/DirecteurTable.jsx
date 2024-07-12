@@ -10,7 +10,7 @@ function DirecteurTable() {
       try {
         const response = await axios.get('https://localhost:7153/Requests/list');
         console.log('Demande envoyée:', response.data);
-        setRequests(response.data);
+        setRequests(response.data); // Update state with fetched data
       } catch (error) {
         console.error('Erreur lors de l\'envoi de la demande:', error);
       }

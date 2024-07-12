@@ -9,10 +9,12 @@ function AssistanteForm() {
     const onSubmit = async (data) => {
         const requestData = {
             ...data,
-            role: 'assistante',
+            role: 'assistant',
             idTrainee: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
             modeleId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-            documentStatus: 0
+            documentStatus: 0,
+            reasonRejection: "string",
+            motifRejection: "string"
         };
 
         console.log(data);
