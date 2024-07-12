@@ -5,8 +5,8 @@ import TraineeForm from './components/Trainee/TraineeDemande/TraineeForm'
 import Home from './components/Home/Home'
 import AssistanteTable from './components/Assistante/AssistanteTable'
 import DirecteurTable from './components/Directeur/DirecteurTable'
-import DirecteurTableValide from './components/Directeur/DirecteurTableValide'
 import Header from './components/UI/Header/Header'
+import DirecteurDashboard from './components/Directeur/DirecteurDashboard'
 
 
 function App() {
@@ -20,8 +20,8 @@ function App() {
           <Route path='traineeForm' element={<TraineeForm />} />
           <Route path='assistanteForm' element={<AssistanteForm />} />
           <Route path='assistanteTable' element={<AssistanteTable />} />
+          <Route path='directeurDash' element={<DirecteurDashboard />} />
           <Route path='directeurTable' element={<DirecteurTable />} />
-          <Route path='directeurTableValide' element={<DirecteurTableValide />} />
         </Routes>
       </Router>
     </div>
