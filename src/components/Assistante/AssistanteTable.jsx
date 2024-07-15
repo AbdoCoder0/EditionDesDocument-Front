@@ -13,7 +13,7 @@ function AssistanteTable(){
       try {
         const response = await axios.get('https://localhost:7153/Requests/list');
         console.log('Demande envoyée:', response.data);
-        const filteredRequests = response.data.filter(request => request.documentStatus === 0);
+        const filteredRequests = response.data.filter(request => request.documentStatus === 1);
         setRequests(filteredRequests); 
       } catch (error) {
         console.error('Erreur lors de l\'envoi de la demande:', error);
@@ -63,7 +63,7 @@ function AssistanteTable(){
               <tbody>
                 {requests.map((request) => (
                   <tr key={request.id}>
-                    <td className="border-t py-3 px-4">{request.nameTrainee}</td>
+                    <td className="border-t py-3 px-4">{(request.nameTrainee !== null) ? request.nameTrainee : "Stagiaire" }</td>
                     <td className="border-t py-3 px-4">{request.documentType}</td>
                     
                     <td className="border-t py-3 px-1">
