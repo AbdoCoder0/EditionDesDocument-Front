@@ -13,8 +13,8 @@ function App() {
 
   return (
     <div className=''>
-      <Header/>
       <Router>
+        <Header />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='traineeForm' element={<TraineeForm />} />

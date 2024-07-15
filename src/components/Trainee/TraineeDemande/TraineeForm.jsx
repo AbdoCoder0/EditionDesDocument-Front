@@ -18,7 +18,7 @@ const TraineeForm = () => {
       motifRejection: "string"
     };
 
-    // console.log(requestData)
+    console.log(data)
     // const requestData = {
     //   "idTrainee": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
     //   "modeleId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -59,10 +59,10 @@ const TraineeForm = () => {
           >
             <option value="">Sélectionnez un type de document</option>
             <option value="Contrat">Contrat</option>
-            <option value="demande de stage">Demande de stage</option>
-            <option value="convention de stage">Convention de stage</option>
+            <option value="Demande de stage">Demande de stage</option>
+            <option value="Convention de stage">Convention de stage</option>
             <option value="Attestation d'inscription">Attestation d'inscription</option>
-            <option value="attestation de scolarité">Attestation de scolarité</option>
+            <option value="Attestation de scolarité">Attestation de scolarité</option>
           </select>
           {errors.documentType && <span className="text-red-500 text-sm">Ce champ est requis</span>}
         </div>
