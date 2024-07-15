@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const documentTypes = [
     'Contrat',
@@ -92,6 +93,7 @@ const Dashboard = () => {
                     ))}
                 </div>
             </div>
+            <Link to={"/directeurTable"} className=' bg-red-500 rounded-lg p-2'> Directeur Table</Link>
         </div>
     );
 };
