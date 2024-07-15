@@ -13,8 +13,8 @@ function AssistanteTable(){
       try {
         const response = await axios.get('https://localhost:7153/Requests/list');
         console.log('Demande envoyée:', response.data);
-        const filteredRequests = response.data.filter(request => request.documentStatus === 1);
-        setRequests(filteredRequests);
+        const filteredRequests = response.data.filter(request => request.documentStatus === 0);
+        setRequests(filteredRequests); 
       } catch (error) {
         console.error('Erreur lors de l\'envoi de la demande:', error);
       }
@@ -39,13 +39,13 @@ function AssistanteTable(){
               placeholder="Entrer le nom de stagiaire" type="text" name="search"/>
             </div>
 
-            <div className="flex w-full justify-end ">
+            {/* <div className="flex w-full justify-end ">
                 <input id="draft" className="peer/validée" type="radio" name="status" checked />
                 <label htmlFor="draft" className="peer-checked/validée:text-green-500 mx-2">validée</label>
 
                 <input id="published" className="peer/attente ml-7" type="radio" name="status" />
                 <label htmlFor="published" className="peer-checked/attente:text-orange-500 mx-2">en attente</label>
-            </div>
+            </div> */}
 
          </div>
 
