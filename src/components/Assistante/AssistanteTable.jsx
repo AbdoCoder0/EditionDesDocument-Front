@@ -48,11 +48,17 @@ function AssistanteTable() {
               <tbody>
                 {filteredRequests.map((request) => (
                   <tr key={request.id}>
+<<<<<<< HEAD
                     <td className="border-t py-3 px-4">{request.nameTrainee}</td>
                     <td className="border-t py-3 px-4">{request.documentType}</td>                    
                     <td className="border-t py-3 px-4">{request.role}</td>
                     <td className="border-t py-3 px-4">{new Date(request.lastModifiedDate).toLocaleDateString()}</td>
                     <td className="border-t py-3 px-4">{request.id}</td>
+=======
+                    <td className="border-t py-3 px-4">{(request.nameTrainee !== null) ? request.nameTrainee : "Stagiaire" }</td>
+                    <td className="border-t py-3 px-4">{request.documentType}</td>
+                    
+>>>>>>> 7916801235f407cfe4525b162f2eb69c1d1da2de
                     <td className="border-t py-3 px-1">
                       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         Imprimer
