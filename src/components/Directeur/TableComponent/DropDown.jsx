@@ -9,10 +9,10 @@ function Dropdown ({ filterType, onFilterTypeChange }){
     >
       <option value="">Type de document</option>
       <option value="Contrat">Contrat</option>
-      <option value="demande de stage">Demande de stage</option>
-      <option value="convention de stage">Convention de stage</option>
+      <option value="Demande de stage">Demande de stage</option>
+      <option value="Convention de stage">Convention de stage</option>
       <option value="Attestation d'inscription">Attestation d'inscription</option>
-      <option value="attestation de scolarité">Attestation de scolarité</option>
+      <option value="Attestation de scolarité">Attestation de scolarité</option>
     </select>
   );
 };

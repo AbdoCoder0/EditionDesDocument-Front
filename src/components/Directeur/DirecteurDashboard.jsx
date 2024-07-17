@@ -29,7 +29,7 @@ const Dashboard = () => {
                 setError(error);
                 setLoading(false);
             });
-    }, [documentsData]);
+    }, []);
 
     const organizeDocumentsData = (documents) => {
         const data = {};
@@ -63,11 +63,15 @@ const Dashboard = () => {
     return (
         <div className="p-4">
             <h1 className="text-xl font-bold mb-4">Tableau de bord</h1>
+            <div className="my-16 flex gap-10">
+                <Link to={"/directeurTable"} className=' bg-red-500 rounded-lg p-2'> Historique des demandes</Link>
+                <Link to={"/directeurForm"} className=' bg-blue-500 rounded-lg p-2 '> Ajouter une demande</Link>
+            </div>
             <div className="flex justify-center">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-                    {documentTypes.map((type) => (
-                        <div key={type} className="w-80 bg-white rounded-b-lg border-t-8 border-blue-500 px-4 py-5 flex flex-col justify-around shadow-md rounded-xl transform transition duration-500 
-                            hover:scale-105">
+                    {documentTypes.map((type,i) => (
+                        <Link key={i} to={`/documents/${encodeURIComponent(type)}`} className="w-80 bg-white rounded-b-lg border-t-8 border-blue-500 px-4 py-5 flex flex-col justify-around shadow-md rounded-xl transform transition duration-500 hover:scale-105">
+                            
                             <h2 className="text-lg font-semibold">{type}</h2>
                             <div className="mt-2">
                                 <p className='mb-3 flex justify-between'>
@@ -83,17 +87,10 @@ const Dashboard = () => {
                                     <span>{documentsData[type]?.refusées || 0}</span>
                                 </p>
                             </div>
-                            {/* <button
-                className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
-                onClick={() => console.log(`Voir les documents validés pour ${type}`)}
-              >
-                Voir les documents validés
-              </button> */}
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </div>
-            <Link to={"/directeurTable"} className=' bg-red-500 rounded-lg p-2'> Directeur Table</Link>
         </div>
     );
 };

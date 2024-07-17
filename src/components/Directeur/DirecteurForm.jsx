@@ -3,9 +3,7 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { toast, Toaster } from 'react-hot-toast';
 
-import { Link } from 'react-router-dom';
-
-function AssistanteForm() {
+function DirecteurForm() {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
     const onSubmit = async (data) => {
@@ -36,10 +34,8 @@ function AssistanteForm() {
 
     return (
         <>
-            <h1 className='mt-40 mb-4 text-[25px] font-bold flex justify-center items-center'>Interface assistante pedagogique</h1>
-            
-            <Link to={'/assistanteTable'} 
-            className=' bg-purple-500 rounded-lg p-2 my-9'>Assitante Table</Link>
+            <h1 className='mt-40 mb-4 text-[25px] font-bold flex justify-center items-center'>Interface Dirrecteur</h1>
+            <h3 className=' mb-3 font-semibold flex justify-center items-center'>ce document est automatiquement valider</h3>
             <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-md">
                 <Toaster /> 
                 <h2 className="text-2xl font-semibold text-gray-600 mb-4">Formulaire de Demande</h2>
@@ -79,4 +75,4 @@ function AssistanteForm() {
     );
 }
 
-export default AssistanteForm;
+export default DirecteurForm;
