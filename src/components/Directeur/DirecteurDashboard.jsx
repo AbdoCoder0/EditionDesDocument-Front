@@ -40,8 +40,8 @@ const Dashboard = () => {
         documents.forEach(doc => {
             const type = doc.documentType;
             if (data[type]) {
-                if (doc.documentStatus === 1) data[type].enCours += 1;
-                if (doc.documentStatus === 0) {
+                if (doc.documentStatus === 0) data[type].enCours += 1;
+                if (doc.documentStatus === 1) {
                     data[type].validées += 1;
                     data[type].validéesList.push(doc);
                 }
