@@ -72,22 +72,18 @@ function DirecteurTable() {
                   <th className="text-left py-3 px-4 font-semibold text-sm">Type de Document</th>
                   <th className="text-left py-3 px-1 font-semibold text-sm">Expéditeur</th>
                   <th className="text-left py-3 px-1 font-semibold text-sm">Date d'envoie</th>
-<<<<<<< HEAD
+
                   <th className="text-left py-3 pl-16 font-semibold text-sm">Refferens</th>
-=======
-                  <th className="text-left py-3 pl-16 font-semibold text-sm ">Refferens</th>
->>>>>>> 7916801235f407cfe4525b162f2eb69c1d1da2de
+
                   <th className="text-left py-3 px-1 font-semibold text-sm"></th>
                 </tr>
               </thead>
               <tbody>
                 {currentRequests.map((request) => (
                   <tr key={request.id}>
-<<<<<<< HEAD
+
                     <td className="border-t py-3 px-4">{request.nameTrainee !== null ? request.nameTrainee : "Stagiaire"}</td>
-=======
-                    <td className="border-t py-3 px-4">{(request.nameTrainee !== null) ? request.nameTrainee : "Stagiaire" }</td>
->>>>>>> 7916801235f407cfe4525b162f2eb69c1d1da2de
+
                     <td className="border-t py-3 px-4">{request.documentType}</td>
                     <td className="border-t py-3 px-4">{request.role}</td>
                     <td className="border-t py-3 px-4">{new Date(request.createdDate).toLocaleDateString()}</td>
@@ -116,11 +112,8 @@ function DirecteurTable() {
               </tbody>
             </table>
             <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
-<<<<<<< HEAD
           </div>))))))))
-=======
-          </div>
->>>>>>> 7916801235f407cfe4525b162f2eb69c1d1da2de
+
         </div>
       </div>
     </>
