@@ -66,6 +66,7 @@ const Dashboard = () => {
             <div className="my-16 flex gap-10">
                 <Link to={"/directeurTable"} className=' bg-red-500 rounded-lg p-2'> Historique des demandes</Link>
                 <Link to={"/directeurForm"} className=' bg-blue-500 rounded-lg p-2 '> Ajouter une demande</Link>
+                <Link to={"/uploadDoc"} className=' bg-pink-500 rounded-lg p-2 '> upload document</Link>
             </div>
             <div className="flex justify-center">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10">

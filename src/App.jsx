@@ -9,6 +9,7 @@ import Header from './components/UI/Header/Header'
 import DirecteurDashboard from './components/Directeur/DirecteurDashboard'
 import DirecteurForm from './components/Directeur/DirecteurForm'
 import DocumentPage from './components/Directeur/DocumentPage'
+import UploadDoc from './components/Directeur/UploadDoc'
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path='directeurTable' element={<DirecteurTable />} />
           <Route path='directeurForm' element={<DirecteurForm/>} />
           <Route path="/documents/:type" element={<DocumentPage/>}/>
+          <Route path="/uploadDoc" element={<UploadDoc/>}/>
         </Routes>
       </Router>
     </div>

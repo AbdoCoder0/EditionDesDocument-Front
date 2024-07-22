@@ -28,7 +28,7 @@ function AssistanteTable() {
         Table Assistante pour gérer les documents
       </h2>
 
-      <div className="App flex justify-center items-center mt-40">
+      <div className="App flex justify-center items-center mt-4">
         <div className="flex flex-col items-center w-full mx-40">
           
           <Filtrage requests={requests} onFilteredRequests={setFilteredRequests} />

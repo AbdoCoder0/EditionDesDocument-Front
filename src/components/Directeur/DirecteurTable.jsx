@@ -59,7 +59,7 @@ function DirecteurTable() {
         Table Directeur en attente de validation
       </h2>
 
-      <div className="flex justify-center items-center my-40">
+      <div className="flex justify-center items-center my-4">
         <div className="flex flex-col items-center w-full mx-40">
 
           <Filtrage requests={requests} onFilteredRequests={setFilteredRequests} />
