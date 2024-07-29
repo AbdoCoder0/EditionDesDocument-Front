@@ -30,8 +30,12 @@ function AssistanteTable() {
       
       <H1 className='mt-28 mb-2'>Table Assistante pour gérer les documents</H1>
 
+<<<<<<< HEAD
 
       <div className="App flex justify-center items-center mt-40 mb-32">
+=======
+      <div className="App flex justify-center items-center mt-4">
+>>>>>>> 30bc86569107a445215ed90e676de39fb0c9ad11
         <div className="flex flex-col items-center w-full mx-40">
           
           <Filtrage requests={requests} onFilteredRequests={setFilteredRequests} />
