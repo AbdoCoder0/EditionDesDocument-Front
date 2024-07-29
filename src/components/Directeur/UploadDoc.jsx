@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import H1 from '../atoms/H1';
+import Buttons from '../atoms/Buttons';
 
 function UploadDoc() {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -32,39 +34,45 @@ function UploadDoc() {
         setUploadError(true);
       }
     } catch (error) {
-      console.error('There was an error uploading the file!', error);
+      console.error('Une erreur s est produite lors du téléchargement du fichier !', error);
       setUploadSuccess(false);
       setUploadError(true);
     }
   };
 
   return (
-    <div className="max-w-md mx-auto p-4 bg-white rounded shadow-md mt-36">
-      <h1 className="text-2xl font-bold mb-4 text-center">Upload Document</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <>
+      <H1 className='mt-40 mb-4' color="blue">Ajouter un document</H1>
+      
+
+      <div className="max-w-md mx-auto mt-10 card p-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
         <div className="mb-4">
           <input
             type="file"
-            {...register('file', { required: 'Please select a file' })}
+            {...register('file', { required: 'choisi un document' })}
             className="w-full px-3 py-2 border border-gray-300 rounded"
           />
           {errors.file && <p className="text-red-500 text-sm mt-1">{errors.file.message}</p>}
         </div>
-        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-200">Upload</button>
+        <Buttons type="primary">Envoyer la Demande</Buttons>
+        
+
       </form>
 
       {uploadProgress > 0 && (
         <div className="mt-4">
-          <p>Upload Progress: {uploadProgress}%</p>
+          <p>Progression du téléchargement:{uploadProgress}%</p>
           <div className="relative w-full bg-gray-200 rounded">
             <div className="absolute top-0 h-2 bg-blue-500 rounded" style={{ width: `${uploadProgress}%` }}></div>
           </div>
         </div>
       )}
 
-      {uploadSuccess && <p className="text-green-500 text-center mt-4">File uploaded successfully!</p>}
-      {uploadError && <p className="text-red-500 text-center mt-4">There was an error uploading the file.</p>}
+      {uploadSuccess && <p className="text-green-500 text-center mt-4">Fichier téléchargé avec succès!</p>}
+      {uploadError && <p className="text-red-500 text-center mt-4">Une erreur s'est produite lors du téléchargement du fichier.</p>}
     </div>
+    </>
   );
 }
 

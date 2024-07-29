@@ -77,7 +77,10 @@ const Dashboard = () => {
                     <Buttons type='primary'>Ajouter une demande
                     </Buttons> 
                 </Link>
-                <Link to={"/uploadDoc"} className=' bg-pink-500 rounded-lg p-2 '> upload document</Link>
+                <Link to={"/uploadDoc"} className=' p-2'>
+                    <Buttons type='secondary'>basculez vers le laboratoir
+                    </Buttons> 
+                </Link>
             </div>
             <div className="flex justify-center">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
