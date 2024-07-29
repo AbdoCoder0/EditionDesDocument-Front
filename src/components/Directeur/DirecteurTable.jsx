@@ -3,6 +3,8 @@ import axios from 'axios';
 import Pagination from './TableComponent/Pagination';
 import Filtrage from './Fitrage';
 import RefuseButton from './TableComponent/RefuseButton';
+import Buttons from '../atoms/Buttons';
+import H1 from '../atoms/H1';
 
 function DirecteurTable() {
   const [requests, setRequests] = useState([]);
@@ -55,11 +57,11 @@ function DirecteurTable() {
 
   return (
     <>
-      <h2 className="text-2xl font-bold my-6 flex justify-center items-center">
+      <H1 className="mt-10 ">
         Table Directeur en attente de validation
-      </h2>
+      </H1>
 
-      <div className="flex justify-center items-center my-40">
+      <div className="flex justify-center items-center mt-32 mb-40">
         <div className="flex flex-col items-center w-full mx-40">
 
           <Filtrage requests={requests} onFilteredRequests={setFilteredRequests} />
@@ -68,42 +70,46 @@ function DirecteurTable() {
             <table className="bg-white border border-gray-200 w-full">
               <thead>
                 <tr className="bg-gray-100">
-                  <th className="text-left py-3 px-4 font-semibold text-sm">Nom et Prenom</th>
-                  <th className="text-left py-3 px-4 font-semibold text-sm">Type de Document</th>
-                  <th className="text-left py-3 px-1 font-semibold text-sm">Expéditeur</th>
-                  <th className="text-left py-3 px-1 font-semibold text-sm">Date d'envoie</th>
+                  <th className="text-left py-3 px-4 font-semibold text-lg bg-darkBlue text-gris-clair">Nom et Prenom</th>
+                  <th className="text-left py-3 px-4 font-semibold text-lg bg-darkBlue text-gris-clair">Type de Document</th>
+                  <th className="text-left py-3 px-4 font-semibold text-lg bg-darkBlue text-gris-clair">Expéditeur</th>
+                  <th className="text-left py-3 px-4 font-semibold text-lg bg-darkBlue text-gris-clair">Date d'envoie</th>
 
                   {/* <th className="text-left py-3 pl-16 font-semibold text-sm">Refferens</th> */}
-                  <th className="text-left py-3 pl-16 font-semibold text-sm">état</th>
+                  <th className="text-left py-3 px-4 font-semibold text-lg bg-darkBlue text-gris-clair">état</th>
 
-                  <th className="text-left py-3 px-1 font-semibold text-sm"></th>
+                  <th className="text-left py-3 px-4 font-semibold text-lg bg-darkBlue text-gris-clair"></th>
                 </tr>
               </thead>
               <tbody>
                 {currentRequests.map((request) => (
                   <tr key={request.id}>
 
-                    <td className="border-t py-3 px-4">{request.nameTrainee !== null ? request.nameTrainee : "Stagiaire"}</td>
+                    <td className="border-t py-3 px-4 border-gris-moyen">{request.nameTrainee !== null ? request.nameTrainee : "Stagiaire"}</td>
 
-                    <td className="border-t py-3 px-4">{request.documentType}</td>
-                    <td className="border-t py-3 px-4">{request.role}</td>
-                    <td className="border-t py-3 px-4">{new Date(request.createdDate).toLocaleDateString()}</td>
-                    {/* <td className="border-t py-3 px-4">{request.id}</td> */}
+                    <td className="border-t py-3 px-4 border-gris-moyen">{request.documentType}</td>
+                    <td className="border-t py-3 px-4 border-gris-moyen">{request.role}</td>
+                    <td className="border-t py-3 px-4 border-gris-moyen">{new Date(request.createdDate).toLocaleDateString()}</td>
+                    {/* <td className="border-t py-3 px-4 border-gris-moyen">{request.id}</td> */}
                     
-                    <td className="border-t py-3 px-4">{request.documentStatus}</td>
-                    <td className="border-t py-3 px-1 flex gap-6">
-                      <button
-                        className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                    <td className="border-t py-3 px-4 border-gris-moyen">{request.documentStatus}</td>
+                    <td className="border-t py-3 px-4  border-gris-moyen flex gap-6">
+                      
+                      <Buttons
+                        type={request.documentStatus === 1 ? 'primary' : (request.documentStatus === 2 ? 'disabled' : 'primary')}
                         onClick={() => handleValidate(request.id)}
+                        disabled={request.documentStatus === 2}
                       >
                         Validé
-                      </button>
-                      <button
-                        className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${request.documentStatus !== 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
-                        disabled={request.documentStatus !== 0}
-                      >
-                        Imprimer
-                      </button>
+                      </Buttons>
+
+                      <Buttons
+                        type={request.documentStatus === 1 ? 'secondary' : 'disabled'}
+                        
+                        disabled={request.documentStatus !== 1}
+                      >Imprimer
+                      </Buttons>
+                      
                       <RefuseButton requestId={request.id}
                         requests={requests}
                         setRequests={setRequests}

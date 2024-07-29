@@ -4,6 +4,10 @@ import axios from 'axios';
 import { toast, Toaster } from 'react-hot-toast';
 
 import { Link } from 'react-router-dom';
+import Buttons from '../atoms/Buttons';
+import Labels from '../atoms/Labels';
+import Inputs from '../atoms/Inputs';
+import H1 from '../atoms/H1';
 
 function AssistanteForm() {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -36,26 +40,31 @@ function AssistanteForm() {
 
     return (
         <>
-            <h1 className='mt-40 mb-4 text-[25px] font-bold flex justify-center items-center'>Interface assistante pedagogique</h1>
+            <H1 className='mt-40 mb-4 flex justify-center items-center'>Interface assistante pedagogique</H1>
             
-            <Link to={'/assistanteTable'} 
-            className=' bg-purple-500 rounded-lg p-2 my-9'>Assitante Table</Link>
-            <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-md">
+            <div className="max-w-md mx-auto mt-10 card p-6 ">
                 <Toaster /> 
-                <h2 className="text-2xl font-semibold text-gray-600 mb-4">Formulaire de Demande</h2>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="mb-4">
-                        <label htmlFor="nameTrainee" className="block text-gray-700 mb-4">Nom du Stagiaire</label>
-                        <input
-                            type="text"
-                            id="nameTrainee"
-                            className={`w-full px-3 py-2 border ${errors.nameTrainee ? 'border-red-500' : 'border-gray-300'} rounded-md`}
-                            {...register('nameTrainee', { required: true })}
-                        />
-                        {errors.nameTrainee && <span className="text-red-500 text-sm">Ce champ est requis</span>}
-                    </div>
+                <h2 className="card-title mb-4 text-center">Formulaire de Demande</h2>
+                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
+                <div className="mb-4">
+            <Labels 
+                htmlFor="nameTrainee" 
+                className="block text-gray-700"
+            >
+                Nom du Stagiaire
+            </Labels>
+            
+            <input 
+                type="text"
+                id="nameTrainee"
+                className={`w-full px-3 py-2 border rounded-md ${errors.nameTrainee ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:ring-1 focus:ring-blue-500`}
+                {...register('nameTrainee', { required: true })}
+            />
+            {errors.nameTrainee && <span className="text-red-500 text-sm mt-1">Ce champ est requis</span>}
+        </div>
+
                     <div className='mb-4'>
-                        <label htmlFor="documentType" className="block text-gray-700 mb-4">Type de Document</label>
+                        <Labels htmlFor="documentType" className="block text-gray-700">Type de Document</Labels>
                         <select
                             id="documentType"
                             className={`w-full px-3 py-2 border ${errors.documentType ? 'border-red-500' : 'border-gray-300'} rounded-md`}
@@ -70,11 +79,14 @@ function AssistanteForm() {
                         </select>
                         {errors.documentType && <span className="text-red-500 text-sm">Ce champ est requis</span>}
                     </div>
-                    <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">
-                        Envoyer la Demande
-                    </button>
+                    
+                    <Buttons type="primary" className="w-full py-2">Envoyer la Demande</Buttons>
                 </form>
+                
             </div>
+            <Link to={'/assistanteTable'} className='m-14'>
+             <Buttons type="secondary" >Voir tous les documents validée</Buttons>
+            </Link>
         </>
     );
 }

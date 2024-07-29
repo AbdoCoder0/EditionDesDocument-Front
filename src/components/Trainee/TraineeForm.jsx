@@ -3,6 +3,9 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import { toast, Toaster } from 'react-hot-toast';
+import Buttons from '../atoms/Buttons';
+import Labels from '../atoms/Labels';
+import H1 from '../atoms/H1';
 
 const TraineeForm = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -43,14 +46,14 @@ const TraineeForm = () => {
 
   return (
     <>
-            <h1 className='mt-40 mb-4 text-[25px] font-bold flex justify-center items-center'>Interface stagiaire</h1>
+            <H1 className='mt-40 mb-4' color="blue">Interface stagiaire</H1>
 
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-md">
+    <div className="max-w-md mx-auto mt-10 card p-6">
       <Toaster /> 
-      <h2 className="text-2xl font-semibold mb-4 text-center text-gray-600">Formulaire de Demande</h2>
+      <h2 className="card-title mb-4 text-center">Formulaire de Demande</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
         <div className='mb-4'>
-          <label htmlFor="typeDocument" className="block text-gray-700 mb-4">Type de Document</label>
+          <Labels htmlFor="typeDocument">Type de Document</Labels>
 
           <select
             id="documentType"
@@ -67,9 +70,11 @@ const TraineeForm = () => {
           {errors.documentType && <span className="text-red-500 text-sm">Ce champ est requis</span>}
         </div>
 
-        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">
+        {/* <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">
           Envoyer la Demande
-        </button>
+        </button> */}
+        
+        <Buttons type="primary" >Envoyer la Demande</Buttons>
       </form>
     </div>
     </>

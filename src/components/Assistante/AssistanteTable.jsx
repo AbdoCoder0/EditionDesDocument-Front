@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Filtrage from "../Directeur/Fitrage";
+import { Button } from 'flowbite-react';
+import Buttons from '../atoms/Buttons';
+import H1 from '../atoms/H1';
 
 function AssistanteTable() {
   const [requests, setRequests] = useState([]);
@@ -24,42 +27,41 @@ function AssistanteTable() {
 
   return (
     <>
-      <h2 className="text-2xl font-bold my-6 flex justify-center items-center">
-        Table Assistante pour gérer les documents
-      </h2>
+      
+      <H1 className='mt-28 mb-2'>Table Assistante pour gérer les documents</H1>
 
-      <div className="App flex justify-center items-center mt-40">
+
+      <div className="App flex justify-center items-center mt-40 mb-32">
         <div className="flex flex-col items-center w-full mx-40">
           
           <Filtrage requests={requests} onFilteredRequests={setFilteredRequests} />
           
           <div className="overflow-x-auto mt-10 w-full">
-            <table className="bg-white border border-gray-200 w-full">
+            <table className="bg-white border border-gris-moyen w-full">
               <thead>
-                <tr className="bg-gray-100">
-                  <th className="text-left py-3 px-4 font-semibold text-sm">Nom et Prenom</th>
-                  <th className="text-left py-3 px-4 font-semibold text-sm">Type de Document</th>
-                  <th className="text-left py-3 px-4 font-semibold text-sm">Expéditeur</th>
-                  <th className="text-left py-3 px-4 font-semibold text-sm">Date d'envois</th>
-                  <th className="text-left py-3 px-4 font-semibold text-sm">Refference</th>
-                  <th className="text-left py-3 px-1 font-semibold text-sm"></th>
+                <tr >
+                  <th className="text-left py-3 px-4 font-semibold text-lg bg-darkBlue text-gris-clair">Nom et Prenom</th>
+                  <th className="text-left py-3 px-4 font-semibold text-lg bg-darkBlue text-gris-clair">Type de Document</th>
+                  <th className="text-left py-3 px-4 font-semibold text-lg bg-darkBlue text-gris-clair">Expéditeur</th>
+                  <th className="text-left py-3 px-4 font-semibold text-lg bg-darkBlue text-gris-clair">Date d'envois</th>
+                  <th className="text-left py-3 px-4 font-semibold text-lg bg-darkBlue text-gris-clair">Refference</th>
+                  <th className="text-left py-3 px-1 font-semibold text-lg bg-darkBlue text-gris-clair"></th>
                 </tr>
               </thead>
               <tbody>
                 {filteredRequests.map((request) => (
                   <tr key={request.id}>
-                    <td className="border-t py-3 px-4">{request.nameTrainee}</td>
-                    <td className="border-t py-3 px-4">{request.documentType}</td>                    
-                    <td className="border-t py-3 px-4">{request.role}</td>
-                    <td className="border-t py-3 px-4">{new Date(request.lastModifiedDate).toLocaleDateString()}</td>
-                    <td className="border-t py-3 px-4">{request.id}</td>
-                    <td className="border-t py-3 px-4">{(request.nameTrainee !== null) ? request.nameTrainee : "Stagiaire" }</td>
-                    <td className="border-t py-3 px-4">{request.documentType}</td>
+                    <td className="border-t py-3 px-4 border-gris-moyen">{(request.nameTrainee !== null) ? request.nameTrainee : "Stagiaire" }</td>
+                    <td className="border-t py-3 px-4 border-gris-moyen">{request.documentType}</td>                    
+                    <td className="border-t py-3 px-4 border-gris-moyen">{request.role}</td>
+                    <td className="border-t py-3 px-4 border-gris-moyen">{new Date(request.lastModifiedDate).toLocaleDateString()}</td>
+                    <td className="border-t py-3 px-4 border-gris-moyen">{request.id}</td>
                     
-                    <td className="border-t py-3 px-1">
-                      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        Imprimer
-                      </button>
+                    <td className="border-t py-3 px-1 border-gris-moyen">
+                      
+                      <Buttons type="secondary" className=' py-2 px-4 '>
+                      Imprimer 
+                      </Buttons>
                     </td>
                   </tr>
                 ))}

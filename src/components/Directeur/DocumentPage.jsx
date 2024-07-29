@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Buttons from '../atoms/Buttons';
 
 const DocumentPage = () => {
     const { type } = useParams();
@@ -34,12 +35,12 @@ const DocumentPage = () => {
                         <table className="bg-white border border-gray-200 w-full">
                             <thead>
                                 <tr className="bg-gray-100">
-                                    <th className="text-left py-3 px-4 font-semibold text-sm">Nom et Prenom</th>
-                                    <th className="text-left py-3 px-4 font-semibold text-sm">Expéditeur</th>
-                                    <th className="text-left py-3 px-4 font-semibold text-sm">Date de validation</th>
-                                    <th className="text-left py-3 px-4 font-semibold text-sm">Refference</th>
-                                    <th className="text-left py-3 px-4 font-semibold text-sm">état</th>
-                                    <th className="text-left py-3 px-1 font-semibold text-sm"></th>
+                                    <th className="text-left py-3 px-4 font-semibold text-lg bg-darkBlue text-gris-clair">Nom et Prenom</th>
+                                    <th className="text-left py-3 px-4 font-semibold text-lg bg-darkBlue text-gris-clair">Expéditeur</th>
+                                    <th className="text-left py-3 px-4 font-semibold text-lg bg-darkBlue text-gris-clair">Date de validation</th>
+                                    <th className="text-left py-3 px-4 font-semibold text-lg bg-darkBlue text-gris-clair">Refference</th>
+                                    <th className="text-left py-3 px-4 font-semibold text-lg bg-darkBlue text-gris-clair">état</th>
+                                    <th className="text-left py-3 px-4 font-semibold text-lg bg-darkBlue text-gris-clair"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -51,9 +52,9 @@ const DocumentPage = () => {
                                         <td className="border-t py-3 px-4">{request.id}</td>
                                         <td className="border-t py-3 px-4">{request.documentStatus}</td>
                                         <td className="border-t py-3 px-1">
-                                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                            <Buttons type="secondary">
                                                 Imprimer
-                                            </button>
+                                            </Buttons>
                                         </td>
                                     </tr>
                                 ))}

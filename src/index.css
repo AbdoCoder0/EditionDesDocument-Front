@@ -1,3 +1,65 @@
+/* styles.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+
+/* Headings */
+.heading-h1 {
+  @apply text-h1 font-roboto font-bold;
+}
+
+.heading-h2 {
+  @apply text-h2 font-roboto font-medium;
+}
+
+.heading-h3 {
+  @apply text-h3 font-roboto font-medium;
+}
+
+/* Typography */
+.body-text {
+  @apply text-body font-roboto font-regular;
+}
+
+.caption {
+  @apply text-caption font-roboto font-light;
+}
+
+.note {
+  @apply text-note font-roboto font-light;
+}
+
+/* cart Style */
+.card {
+    @apply bg-white border border-lightGray shadow-card rounded-card;
+  }
+  
+  .card-title {
+    @apply text-darkBlue text-[20px] font-roboto font-bold;
+  }
+  
+  .card-text {
+    @apply text-darkGray text-[16px] font-roboto font-regular;
+  }
+
+/* Modal Styles */
+.modal {
+    @apply bg-white border border-lightGray shadow-modal rounded-modal p-4;
+  }
+  
+  .modal-title {
+    @apply text-darkBlue text-[24px] font-roboto font-bold;
+  }
+  
+  .modal-text {
+    @apply text-darkGray text-[16px] font-roboto font-regular;
+  }
+  
+  /* Optional: To style the overlay */
+  .modal-overlay {
+    @apply fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center;
+  }

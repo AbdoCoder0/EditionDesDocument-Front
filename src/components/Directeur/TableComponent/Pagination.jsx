@@ -15,7 +15,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
         {pageNumbers.map(number => (
           <button
             key={number}
-            className={`px-3 py-1 mx-1 rounded ${currentPage === number ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+            className={`px-3 py-1 mx-1 rounded ${currentPage === number ? 'bg-bleu-fonce text-white' : 'bg-gray-200'}`}
             onClick={() => onPageChange(number)}
           >
             {number}

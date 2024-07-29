@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Buttons from '../atoms/Buttons';
+import H1 from '../atoms/H1';
+import H2 from '../atoms/H2';
+import H3 from '../atoms/H3';
+import Text from '../atoms/Text';
 
 const documentTypes = [
     'Contrat',
@@ -62,29 +67,35 @@ const Dashboard = () => {
 
     return (
         <div className="p-4">
-            <h1 className="text-xl font-bold mb-4">Tableau de bord</h1>
-            <div className="my-16 flex gap-10">
-                <Link to={"/directeurTable"} className=' bg-red-500 rounded-lg p-2'> Historique des demandes</Link>
-                <Link to={"/directeurForm"} className=' bg-blue-500 rounded-lg p-2 '> Ajouter une demande</Link>
+            <H1 className="mb-4 ">Tableau de bord</H1>
+            <div className="my-16 flex  justify-center gap-10">
+                <Link to={"/directeurTable"} className=' p-2'>
+                    <Buttons type='secondary'>Historique des demandes
+                    </Buttons> 
+                </Link>
+                <Link to={"/directeurForm"} className=' p-2'>
+                    <Buttons type='primary'>Ajouter une demande
+                    </Buttons> 
+                </Link>
             </div>
             <div className="flex justify-center">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                     {documentTypes.map((type,i) => (
-                        <Link key={i} to={`/documents/${encodeURIComponent(type)}`} className="w-80 bg-white rounded-b-lg border-t-8 border-blue-500 px-4 py-5 flex flex-col justify-around shadow-md rounded-xl transform transition duration-500 hover:scale-105">
+                        <Link key={i} to={`/documents/${encodeURIComponent(type)}`} className="w-80 bg-white rounded-b-lg border-t-8 border-bleu-fonce px-4 py-5 flex flex-col justify-around shadow-md rounded-xl transform transition duration-500 hover:scale-105">
                             
-                            <h2 className="text-lg font-semibold">{type}</h2>
+                            <H3 type="medium">{type}</H3>
                             <div className="mt-2">
                                 <p className='mb-3 flex justify-between'>
-                                    <span>Validées</span>
-                                    <span>{documentsData[type]?.validées || 0}</span>
+                                    <Text>Validées</Text>
+                                    <Text>{documentsData[type]?.validées || 0}</Text>
                                 </p>
                                 <p className='mb-3 flex justify-between'>
-                                    <span>En cours</span>
-                                    <span>{documentsData[type]?.enCours || 0}</span>
+                                    <Text>En cours</Text>
+                                    <Text>{documentsData[type]?.enCours || 0}</Text>
                                 </p>
                                 <p className='mb-3 flex justify-between'>
-                                    <span>Refusées</span>
-                                    <span>{documentsData[type]?.refusées || 0}</span>
+                                    <Text>Refusées</Text>
+                                    <Text>{documentsData[type]?.refusées || 0}</Text>
                                 </p>
                             </div>
                         </Link>
