@@ -49,7 +49,43 @@ function DirecteurTable() {
     }
   };
 
-  //document.status logic
+  const handlePrint = async () => {
+    try {
+      const documentId = '5254ee7b-15ea-4447-b51b-1400826008d0';
+      // Fetch document data
+      const response = await axios.get(`https://localhost:7153/api/Document/${documentId}`);
+      console.log(response.data);
+      console.log(response.data.pathFile);
+      
+      
+      const  pathFile  = response.data.pathFile;
+
+      if (pathFile) {
+        // Trigger file download
+        const fileResponse = await axios.post(`https://localhost:7153/api/Document/getDocumentByURL`, pathFile, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        // Create a link to download the file
+        const url = window.URL.createObjectURL(new Blob([fileResponse.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', pathFile.split('/').pop()); // Extract the file name from the pathFile
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      } else {
+        console.error('pathFile is missing in document data');
+      }
+
+    } catch (error) {
+      console.error('Erreur lors de la récupération du document:', error);
+    }
+  };
+
+  // document.status logic
   const getDocumentStatus = (status) => {
     switch (status) {
       case 0:
@@ -113,6 +149,7 @@ function DirecteurTable() {
                       <Buttons
                         type={request.documentStatus === 1 ? 'secondary' : 'disabled'}
                         disabled={request.documentStatus !== 1}
+                        onClick={() => handlePrint(request.id)} // Pass the request ID to handlePrint
                       >
                         Imprimer
                       </Buttons>
