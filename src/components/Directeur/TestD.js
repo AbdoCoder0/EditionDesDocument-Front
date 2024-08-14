@@ -20,7 +20,7 @@ function DirecteurTable() {
         setRequests(sortedData);
         setFilteredRequests(sortedData); // Initialize filtered requests with all requests
       } catch (error) {
-        console.error('Erreur lors de la récupération des demandes:', error);
+        console.error('Erreur lors de l\'envoi de la demande:', error);
       }
     };
 
@@ -29,8 +29,6 @@ function DirecteurTable() {
 
   const handleValidate = async (oldId) => {
     try {
-      console.log(oldId);
-      
       const updatedRequests = requests.map(request => {
         if (request.id === oldId) {
           return { ...request, documentStatus: 1 };
@@ -38,14 +36,12 @@ function DirecteurTable() {
         return request;
       });
 
-
       setRequests(updatedRequests);
       setFilteredRequests(updatedRequests);
 
       await axios.put(`https://localhost:7153/Requests/update`, {
         id: oldId,
-        documentStatus: 1,
-        reasonRejection:"nonReason"
+        documentStatus: 1
       });
 
     } catch (error) {
@@ -53,12 +49,15 @@ function DirecteurTable() {
     }
   };
 
-  const handlePrint = async (documentId) => {
+  const handlePrint = async () => {
     try {
-      // Fetch document data by documentId
+      const documentId = '41f51970-7ac7-45a8-92f3-41b50173efd2';
+      // Fetch document data
       const response = await axios.get(`https://localhost:7153/api/Document/${documentId}`);
       console.log(response.data);
       console.log(response.data.pathFile);
+      
+      
       const  pathFile  = response.data.pathFile;
 
       if (pathFile) {
@@ -108,7 +107,7 @@ function DirecteurTable() {
 
   return (
     <>
-      <H1 className="mt-10">
+      <H1 className="mt-10 ">
         Table Directeur en attente de validation
       </H1>
 
@@ -150,7 +149,7 @@ function DirecteurTable() {
                       <Buttons
                         type={request.documentStatus === 1 ? 'secondary' : 'disabled'}
                         disabled={request.documentStatus !== 1}
-                        onClick={() => handlePrint(request.documentId)} 
+                        onClick={() => handlePrint(request.id)} 
                       >
                         Imprimer
                       </Buttons>
