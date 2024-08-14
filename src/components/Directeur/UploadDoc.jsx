@@ -55,7 +55,7 @@ function UploadDoc() {
           />
           {errors.file && <p className="text-red-500 text-sm mt-1">{errors.file.message}</p>}
         </div>
-        <Buttons type="primary">Envoyer la Demande</Buttons>
+        <Buttons type="primary">Ajouter document</Buttons>
         
 
       </form>
