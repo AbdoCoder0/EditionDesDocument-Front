@@ -42,25 +42,41 @@ function DirecteurForm() {
             <H1 className='mt-40 mb-4 heading-h1 flex justify-center items-center'>Interface Dirrecteur</H1>
             <H3 color='medium' className=' mb-3 font-semibold flex justify-center items-center'>ce document est automatiquement valider</H3>
             <div className="max-w-md mx-auto mt-10 card p-6 ">
-                <Toaster /> 
+                <Toaster />
                 <H2 color='blue' className="card-title mb-4 text-center">Formulaire de Demande</H2>
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
-                <div className="mb-4">
-            <Labels 
-                htmlFor="nameTrainee" 
-                className="block pb-2 text-gray-700"
-            >
-                Nom du Stagiaire
-            </Labels>
-            
-            <input 
-                type="text"
-                id="nameTrainee"
-                className={`w-full px-3 py-2 border rounded-md ${errors.nameTrainee ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:ring-1 focus:ring-blue-500`}
-                {...register('nameTrainee', { required: true })}
-            />
-            {errors.nameTrainee && <span className="text-red-500 text-sm mt-1">Ce champ est requis</span>}
-        </div>
+                    {/* <div className="mb-4">
+                        <Labels
+                            htmlFor="nameTrainee"
+                            className="block pb-2 text-gray-700"
+                        >
+                            Nom du Stagiaire
+                        </Labels>
+
+                        <input
+                            type="text"
+                            id="nameTrainee"
+                            className={`w-full px-3 py-2 border rounded-md ${errors.nameTrainee ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:ring-1 focus:ring-blue-500`}
+                            {...register('nameTrainee', { required: true })}
+                        />
+                        {errors.nameTrainee && <span className="text-red-500 text-sm mt-1">Ce champ est requis</span>}
+                    </div> */}
+
+
+                    <div className='mb-4'>
+                        <Labels htmlFor="priorityLevel" className="block text-gray-700 mb-4">Niveau de Priorité</Labels>
+                        <select
+                            id="priorityLevel"
+                            className={`w-full px-3 py-2 border ${errors.priorityLevel ? 'border-red-500' : 'border-gray-300'} rounded-md`}
+                            {...register('priorityLevel', { required: true })}
+                        >
+                            <option value="">Sélectionnez un Stagiaire</option>
+                            <option value="Haute">Stagiare1</option>
+                            <option value="Moyenne">Stagiare2</option>
+                            <option value="Basse">Stagiare3</option>
+                        </select>
+                        {errors.priorityLevel && <span className="text-red-500 text-sm">Ce champ est requis</span>}
+                    </div>
 
                     <div className='mb-4'>
                         <Labels htmlFor="documentType" className="block text-gray-700 mb-4">Type de Document</Labels>
@@ -78,12 +94,12 @@ function DirecteurForm() {
                         </select>
                         {errors.documentType && <span className="text-red-500 text-sm">Ce champ est requis</span>}
                     </div>
-                    
+
                     <Buttons type="primary" className="w-full py-2">Envoyer la Demande</Buttons>
                 </form>
-                
+
             </div>
-    </>
-  );
+        </>
+    );
 };
 export default DirecteurForm;
