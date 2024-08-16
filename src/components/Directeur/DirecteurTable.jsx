@@ -53,40 +53,42 @@ function DirecteurTable() {
     }
   };
 
+
   const handlePrint = async (documentId) => {
     try {
-      // Fetch document data by documentId
-      const response = await axios.get(`https://localhost:7153/api/Document/${documentId}`);
-      console.log(response.data);
-      console.log(response.data.pathFile);
-      const  pathFile  = response.data.pathFile;
+        // Fetch document data by documentId
+        const response = await axios.get(`https://localhost:7153/api/Document/${documentId}`);
+        const pathFile = response.data.pathFile;
 
-      if (pathFile) {
-        // Trigger file download
-        const fileResponse = await axios.post(`https://localhost:7153/api/Document/getDocumentByURL`, pathFile, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+        if (pathFile) {  
+            const fileResponse = await axios.get(`https://localhost:7153/api/File/download`, {
+                params: {
+                    url: pathFile
+                },
+                responseType: 'blob', 
+            });
 
-        // Create a link to download the file
-        const url = window.URL.createObjectURL(new Blob([fileResponse.data]));
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', pathFile.split('/').pop()); 
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-      } else {
-        console.error('pathFile is missing in document data');
-      }
+            // Create a link to download the file
+            const url = window.URL.createObjectURL(new Blob([fileResponse.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', pathFile.split('/').pop()); 
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+        } else {
+            console.error('pathFile is missing in document data');
+        }
 
     } catch (error) {
-      console.error('Erreur lors de la récupération du document:', error);
+        console.error('Erreur lors de la récupération du document:', error);
     }
-  };
+};
 
-  // document.status logic
+
+  
+
+  // document status logic
   const getDocumentStatus = (status) => {
     switch (status) {
       case 0:
