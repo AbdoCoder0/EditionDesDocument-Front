@@ -84,6 +84,9 @@ const Dashboard = () => {
                 <Link to={"/uploadDoc"} className='p-2'>
                     <Buttons type='secondary'>Basculez vers le laboratoire</Buttons>
                 </Link>
+                <Link to={"/traineeTable"} className='p-2'>
+                    <Buttons type='secondary'>list Trainee</Buttons>
+                </Link>
             </div>
             <div className="flex justify-center">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10">

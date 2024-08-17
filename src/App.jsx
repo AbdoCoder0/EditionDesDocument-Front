@@ -10,6 +10,7 @@ import DirecteurDashboard from './components/Directeur/DirecteurDashboard'
 import DirecteurForm from './components/Directeur/DirecteurForm'
 import DocumentPage from './components/Directeur/DocumentPage'
 import UploadDoc from './components/Directeur/UploadDoc'
+import TraineeTable from './components/Directeur/TraineeTable'
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path='assistanteTable' element={<AssistanteTable />} />
           <Route path='directeurDash' element={<DirecteurDashboard />} />
           <Route path='directeurTable' element={<DirecteurTable />} />
+          <Route path='traineeTable' element={<TraineeTable />} />
           <Route path='directeurForm' element={<DirecteurForm/>} />
           <Route path="/documents/:type" element={<DocumentPage/>}/>
           <Route path="/uploadDoc" element={<UploadDoc/>}/>
