@@ -26,7 +26,9 @@ const TraineeTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://localhost:7153/api/Trainees/list');
+        // await axios.post('https://localhost:7153/api/Kafka/RequestListTrainee');
+        const response = await axios.get('https://localhost:7153/api/Kafka/RetrieveListTrainee');
+        // const response = await axios.get('https://localhost:7153/api/Trainees/list');
         console.log("Fetched trainees:", response.data);
 
         const sortedData = response.data.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));

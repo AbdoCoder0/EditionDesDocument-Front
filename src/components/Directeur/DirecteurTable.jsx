@@ -5,6 +5,7 @@ import Filtrage from './Fitrage';
 import RefuseButton from './TableComponent/RefuseButton';
 import Buttons from '../atoms/Buttons';
 import H1 from '../atoms/H1';
+import fileDownload from 'js-file-download';
 
 function DirecteurTable() {
   const [requests, setRequests] = useState([]);
@@ -30,7 +31,7 @@ function DirecteurTable() {
   const handleValidate = async (oldId) => {
     try {
       console.log(oldId);
-      
+
       const updatedRequests = requests.map(request => {
         if (request.id === oldId) {
           return { ...request, documentStatus: 1 };
@@ -45,7 +46,7 @@ function DirecteurTable() {
       await axios.put(`https://localhost:7153/Requests/update`, {
         id: oldId,
         documentStatus: 1,
-        reasonRejection:"nonReason"
+        reasonRejection: "nonReason"
       });
 
     } catch (error) {
@@ -56,37 +57,99 @@ function DirecteurTable() {
 
   const handlePrint = async (documentId) => {
     try {
-        // Fetch document data by documentId
-        const response = await axios.get(`https://localhost:7153/api/Document/${documentId}`);
-        const pathFile = response.data.pathFile;
+      // Step 1: Fetch Document Data
+      // console.log('Fetching document data...');
+      const documentResponse = await axios.get(`https://localhost:7153/api/Document/${documentId}`);
+      const document = documentResponse.data;
+      // console.log('Document fetched:', document);
 
-        if (pathFile) {  
-            const fileResponse = await axios.get(`https://localhost:7153/api/File/download`, {
-                params: {
-                    url: pathFile
-                },
-                responseType: 'blob', 
-            });
+      // Step 2: Request the List of Trainees
+      // console.log('Requesting list of trainees...');
+      // await axios.post('https://localhost:7153/api/Kafka/RequestListTrainee');
+      // console.log('Request for trainees sent.');
 
-            // Create a link to download the file
-            const url = window.URL.createObjectURL(new Blob([fileResponse.data]));
-            const link = document.createElement('a');
-            link.href = url;
-            link.setAttribute('download', pathFile.split('/').pop()); 
-            document.body.appendChild(link);
-            link.click();
-            link.remove();
-        } else {
-            console.error('pathFile is missing in document data');
+      // Step 3: Retrieve the List of Trainees
+      console.log('Retrieving list of trainees...');
+      const traineeResponse = await axios.get('https://localhost:7153/api/Kafka/RetrieveListTrainee');
+      const trainees = traineeResponse.data;
+      // console.log('List of trainees retrieved:', trainees);
+
+      const idTrainee = "566cef23-fbef-45fa-a5c2-00ee22975cf0"; // Example trainee ID rachida
+      // const idTrainee = "1464a842-6042-4c1c-b5fc-c0a739a3c6cc"; // Example trainee ID abdelkader
+
+      // Debug: Log IDs to ensure they match
+      // console.log("idTrainee:", idTrainee);
+
+      const trainee = trainees.find(t => {
+        return t.id === idTrainee;
+      });
+      console.log(trainee.id);
+
+      if (!trainee) {
+        console.error('Trainee not found');
+        throw new Error('Trainee not found');
+      }
+
+      console.log("Filtered trainee:", trainee);
+
+      // Step 4: Update InstantJSON with Trainee Data
+      // Update InstantJSON
+      const instantJSON = JSON.parse(document.instantJSON);
+
+      // Map through formFieldValues and update fields based on trainee attributes
+      const updatedFormFieldValues = instantJSON.formFieldValues.map(field => {
+        // Use the field name to get the corresponding value from the trainee object
+        const traineeValue = trainee[field.name];
+
+        // If the field exists in the trainee object, update its value
+        if (traineeValue !== undefined) {
+          return {
+            ...field,
+            value: traineeValue
+          };
         }
 
+        // If the field is not in the trainee object, return it unchanged
+        return field;
+      });
+
+      // Update instantJSON with modified fields
+      instantJSON.formFieldValues = updatedFormFieldValues;
+      const updatedInstantJSON = JSON.stringify(instantJSON);
+
+      console.log("updatedInstantJSON   "+  updatedInstantJSON);
+
+      // Update Document
+      await axios.put('https://localhost:7153/api/Document/update', {
+        id: document.id,
+        pathFile: document.pathFile,
+        instantJSON: updatedInstantJSON,
+        name: document.name
+      });
+      console.log('Document updated successfully.');
+
+      // Step 6: Download the Updated Document
+      console.log('Downloading updated document...');
+      const downloadResponse = await axios.get('https://localhost:7153/api/File/download', {
+        params: { url: document.pathFile }, // Use document.pathFile as URL query parameter
+        responseType: 'blob'
+      });
+
+      console.log('Download response status:', downloadResponse.status);
+      console.log('Download response headers:', downloadResponse.headers);
+
+      // Use js-file-download to trigger the download
+      fileDownload(downloadResponse.data, document.name);
+
+
+      console.log('Document downloaded successfully.');
     } catch (error) {
-        console.error('Erreur lors de la récupération du document:', error);
+      console.error('Error during print operation:', error);
     }
-};
+  };
 
 
-  
+
 
   // document status logic
   const getDocumentStatus = (status) => {
@@ -152,7 +215,7 @@ function DirecteurTable() {
                       <Buttons
                         type={request.documentStatus === 1 ? 'secondary' : 'disabled'}
                         disabled={request.documentStatus !== 1}
-                        onClick={() => handlePrint(request.documentId)} 
+                        onClick={() => handlePrint(request.documentId)}
                       >
                         Imprimer
                       </Buttons>
