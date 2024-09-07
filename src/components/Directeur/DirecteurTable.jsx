@@ -70,11 +70,13 @@ function DirecteurTable() {
 
       // Step 3: Retrieve the List of Trainees
       console.log('Retrieving list of trainees...');
-      const traineeResponse = await axios.get('https://localhost:7153/api/Kafka/RetrieveListTrainee');
+      const traineeResponse = await axios.get('https://localhost:7153/api/Trainees/list');
+      // const traineeResponse = await axios.get('https://localhost:7153/api/Kafka/RetrieveListTrainee');
       const trainees = traineeResponse.data;
-      // console.log('List of trainees retrieved:', trainees);
+      console.log('List of trainees retrieved:', trainees);
 
-      const idTrainee = "566cef23-fbef-45fa-a5c2-00ee22975cf0"; // Example trainee ID rachida
+      const idTrainee = "8993433f-781d-4726-3e64-08dcbc90c4fe"; // Example trainee ID Souhail
+      // const idTrainee = "566cef23-fbef-45fa-a5c2-00ee22975cf0"; // Example trainee ID rachida
       // const idTrainee = "1464a842-6042-4c1c-b5fc-c0a739a3c6cc"; // Example trainee ID abdelkader
 
       // Debug: Log IDs to ensure they match
